@@ -1,0 +1,9 @@
+name: soundio
+version: 0.1.0
+
+authors:
+  - Astellon
+
+crystal: 0.31.1
+
+license: MIT
