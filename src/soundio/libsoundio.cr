@@ -180,14 +180,14 @@ lib LibSoundIo
 
   struct SoundIo
     userdata : Void*
-    on_device_change : Proc(SoundIo*, Void)*
-    on_backend_disconnect : Proc(SoundIo*, Int32, Void)*
-    on_events_signal : Proc(SoundIo*, Void)*
+    on_device_change : SoundIo* -> Void
+    on_backend_disconnect : SoundIo*, Int32 -> Void
+    on_events_signal : SoundIo* -> Void
     current_backend : LibSoundIo::Backend
     app_name : UInt8*
-    emit_rtprio_warning : Proc(Void)*
-    jack_info_callback : Proc(UInt8*, Void)*
-    jack_error_callback : Proc(UInt8*, Void)*
+    emit_rtprio_warning : Void -> Void
+    jack_info_callback : UInt8* -> Void
+    jack_error_callback : UInt8* -> Void
   end
 
   struct Device
@@ -220,9 +220,9 @@ lib LibSoundIo
     software_latency : Float64
     volume : Float32
     userdata : Void*
-    write_callback : Proc(OutStream*, Int32, Int32, Void)*
-    underflow_callback : Proc(OutStream, Void)*
-    error_callback : Proc(OutStream*, Int32, Void)*
+    write_callback : OutStream*, Int32, Int32 -> Void
+    underflow_callback : OutStream* -> Void
+    error_callback : OutStream*, Int32 -> Void
     name : UInt8*
     non_terminal_hint : Bool
     bytes_per_frame : Int32
@@ -237,9 +237,9 @@ lib LibSoundIo
     layout : ChannelLayout
     software_latency : Float64
     userdata : Void*
-    read_callback : Proc(OutStream*, Int32, Int32, Void)*
-    overflow_callback : Proc(OutStream, Void)*
-    error_callback : Proc(OutStream*, Int32, Void)*
+    read_callback : OutStream*, Int32, Int32 -> Void
+    overflow_callback : OutStream* -> Void
+    error_callback : OutStream*, Int32 -> Void
     name : UInt8*
     non_terminal_hint : Bool
     bytes_per_frame : Int32
@@ -317,6 +317,7 @@ lib LibSoundIo
   fun outstream_create = soundio_outstream_create(Device*) : OutStream*
   fun outstream_destroy = soundio_outstream_destroy(OutStream*) : Void
   fun outstream_open = soundio_outstream_open(OutStream*) : Int32
+  @[Raises]
   fun outstream_start = soundio_outstream_start(OutStream*) : Int32
   fun outstream_begin_write = soundio_outstream_begin_write(OutStream*, ChannelArea**, Int32*) : Int32
   fun outstream_end_write = soundio_outstream_end_write(OutStream*) : Int32
@@ -328,8 +329,8 @@ lib LibSoundIo
   fun instream_destroy = soundio_instream_destroy(InStream*) : Void
   fun instream_open = soundio_instream_open(InStream*) : Int32
   fun instream_start = soundio_instream_start(InStream*) : Int32
-  fun instream_begin_write = soundio_instream_begin_write(InStream*, ChannelArea**, Int32*) : Int32
-  fun instream_end_write = soundio_instream_end_write(InStream*) : Int32
+  fun instream_begin_read = soundio_instream_begin_write(InStream*, ChannelArea**, Int32*) : Int32
+  fun instream_end_read = soundio_instream_end_write(InStream*) : Int32
   fun instream_clear_buffer = soundio_instream_clear_buffer(InStream*) : Int32
   fun instream_pause = soundio_instream_pause(InStream*, Bool) : Int32
   fun instream_get_latency = soundio_instream_get_latency(InStream*, Float64*) : Int32
