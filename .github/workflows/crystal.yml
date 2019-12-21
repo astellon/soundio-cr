@@ -21,6 +21,7 @@ jobs:
         cmake ..
         make
         make install
+        cd ../..
     - uses: actions/checkout@v1
     - name: Install dependencies
       run: shards install
