@@ -19,7 +19,7 @@ jobs:
         cd libsoundio
         mkdir build
         cd build
-        cmake ..
+        cmake .. -DCMAKE_BUILD_TYPE=Release
         make
         make install
     - name: Install dependencies
