@@ -1,10 +1,12 @@
 # soundio-cr
 
-TODO: Write a description here
+This is Crystal bindings for [libsoundio](https://github.com/andrewrk/libsoundio).
 
 ## Installation
 
-1. Add the dependency to your `shard.yml`:
+1. Install libsoundio as you like.
+
+2. Add the dependency to your `shard.yml`:
 
    ```yaml
    dependencies:
@@ -12,7 +14,7 @@ TODO: Write a description here
        github: astellon/soundio-cr
    ```
 
-2. Run `shards install`
+3. Run `shards install`
 
 ## Usage
 
@@ -20,15 +22,13 @@ TODO: Write a description here
 require "soundio"
 ```
 
-TODO: Write usage instructions here
+## Example
 
-## Development
-
-TODO: Write development instructions here
+[soundio-cr/example/sin.cr](https://github.com/astellon/soundio-cr/blob/master/example/sin.cr)
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/soundio-cr/fork>)
+1. Fork it (<https://github.com/astellon/soundio-cr/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -36,4 +36,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [astellon](https://github.com/astellon) - creator and maintainer
+- [Astellon](https://github.com/astellon) - creator and maintainer
