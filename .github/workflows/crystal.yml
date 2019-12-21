@@ -22,8 +22,9 @@ jobs:
         cmake ..
         make
         make install
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     - name: Install dependencies
       run: shards install
     - name: Run tests
-      run: crystal spec
+      run: |
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+        crystal spec
