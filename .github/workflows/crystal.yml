@@ -22,7 +22,7 @@ jobs:
         cmake ..
         make
         make install
-        cd ../..
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     - name: Install dependencies
       run: shards install
     - name: Run tests
