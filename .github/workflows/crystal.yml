@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Install libsoundio
-      run: sudo apt update
+      run: apt update
     - uses: actions/checkout@v1
     - name: Install dependencies
       run: shards install
