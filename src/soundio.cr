@@ -1,1 +1,1 @@
-require "./soundio/*"
+require "./soundio/libsoundio.cr"
