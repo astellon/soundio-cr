@@ -13,6 +13,7 @@ jobs:
     steps:
     - name: Install libsoundio
       run: |
+        apt update && apt install -y cmake
         git clone -b 2.0.0 https://github.com/andrewrk/libsoundio.git
         cd libsoundio
         mkdir build
