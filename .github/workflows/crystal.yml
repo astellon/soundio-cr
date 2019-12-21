@@ -11,6 +11,7 @@ jobs:
       image: crystallang/crystal
 
     steps:
+    - uses: actions/checkout@v1
     - name: Install libsoundio
       run: |
         apt update && apt install -y cmake
@@ -22,7 +23,6 @@ jobs:
         make
         make install
         cd ../..
-    - uses: actions/checkout@v1
     - name: Install dependencies
       run: shards install
     - name: Run tests
