@@ -12,7 +12,14 @@ jobs:
 
     steps:
     - name: Install libsoundio
-      run: apt update && apt install -y libsoundio-dev
+      run: |
+        git clone -b 2.0.0 https://github.com/andrewrk/libsoundio.git
+        cd libsoundio
+        mkdir build
+        cd build
+        cmake ..
+        make
+        make install
     - uses: actions/checkout@v1
     - name: Install dependencies
       run: shards install
