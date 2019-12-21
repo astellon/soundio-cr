@@ -107,7 +107,7 @@ describe "LibSoundIo" do
   #### ring buffer ####
   it "ring_buffer_{create|destroy}" do
     io = Helper.get_soundio()
-    rb = LibSoundIo.ring_buffer_create(io, 32).address.should be > Pointer(LibSoundIo::RingBuffer).null.address
+    rb = LibSoundIo.ring_buffer_create(io, 32).should_not eq Pointer(UInt8).null
     LibSoundIo.ring_buffer_destroy(rb)
   end
 
@@ -120,7 +120,7 @@ describe "LibSoundIo" do
   it "ring_buffer_write_ptr" do
     io = Helper.get_soundio()
     rb = LibSoundIo.ring_buffer_create(io, 32)
-    LibSoundIo.ring_buffer_write_ptr(rb).address.should be > Pointer(UInt8).null.address
+    LibSoundIo.ring_buffer_write_ptr(rb).should_not eq Pointer(UInt8).null
     LibSoundIo.ring_buffer_destroy(rb)
   end
 
@@ -134,7 +134,7 @@ describe "LibSoundIo" do
   it "ring_buffer_read_ptr" do
     io = Helper.get_soundio()
     rb = LibSoundIo.ring_buffer_create(io, 32)
-    LibSoundIo.ring_buffer_read_ptr(rb).address.should be > Pointer(UInt8).null.address
+    LibSoundIo.ring_buffer_read_ptr(rb).should_not eq Pointer(UInt8).null
     LibSoundIo.ring_buffer_destroy(rb)
   end
 
