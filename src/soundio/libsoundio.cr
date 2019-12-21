@@ -162,10 +162,12 @@ lib LibSoundIo
 
   #### structs ####
 
+  SOUNDIO_MAX_CHANNELS = 24
+
   struct ChannelLayout
     name : UInt8*
     channel_count : Int32
-    channels : ChannelId*
+    channels : StaticArray(ChannelId, SOUNDIO_MAX_CHANNELS)
   end
 
   struct SampleRateRange
