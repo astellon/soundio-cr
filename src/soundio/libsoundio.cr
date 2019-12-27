@@ -157,21 +157,37 @@ lib LibSoundIo
     Float64BE
     {% if IO::ByteFormat::SystemEndian == IO::ByteFormat::LittleEndian %}
       S16NE     = S16LE
+      S16FE     = S16BE
       U16NE     = U16LE
+      U16FE     = U16BE
       S24NE     = S24LE
+      S24FE     = S24BE
       U24NE     = U24LE
+      U24FE     = U24BE
       S32NE     = S32LE
+      S32FE     = S32BE
       U32NE     = U32LE
+      U32FE     = U32BE
       Float32NE = Float32LE
+      Float32FE = Float32BE
       Float64NE = Float64LE
+      Float64FE = Float64BE
     {% else %}
+      S16FE     = S16LE
       S16NE     = S16BE
+      U16FE     = U16LE
       U16NE     = U16BE
+      S24FE     = S24LE
       S24NE     = S24BE
+      U24FE     = U24LE
       U24NE     = U24BE
+      S32FE     = S32LE
       S32NE     = S32BE
+      U32FE     = U32LE
       U32NE     = U32BE
+      Float32FE = Float32LE
       Float32NE = Float32BE
+      Float64FE = Float64LE
       Float64NE = Float64BE
     {% end %}
   end
