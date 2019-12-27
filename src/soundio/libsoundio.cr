@@ -1,8 +1,5 @@
 @[Link("soundio")]
 lib LibSoundIo
-
-  #### enums ####
-
   enum Error
     None
     NoMem
@@ -158,9 +155,26 @@ lib LibSoundIo
     Float32BE
     Float64LE
     Float64BE
+    {% if IO::ByteFormat::SystemEndian == IO::ByteFormat::LittleEndian %}
+      S16NE     = S16LE
+      U16NE     = U16LE
+      S24NE     = S24LE
+      U24NE     = U24LE
+      S32NE     = S32LE
+      U32NE     = U32LE
+      Float32NE = Float32LE
+      Float64NE = Float64LE
+    {% else %}
+      S16NE     = S16BE
+      U16NE     = U16BE
+      S24NE     = S24BE
+      U24NE     = U24BE
+      S32NE     = S32BE
+      U32NE     = U32BE
+      Float32NE = Float32BE
+      Float64NE = Float64BE
+    {% end %}
   end
-
-  #### structs ####
 
   SOUNDIO_MAX_CHANNELS = 24
 
@@ -228,7 +242,7 @@ lib LibSoundIo
     name : UInt8*
     non_terminal_hint : Bool
     bytes_per_frame : Int32
-    bytes_per_sample　: Int32
+    bytes_per_sample　 : Int32
     layout_error : Int32
   end
 
@@ -245,49 +259,40 @@ lib LibSoundIo
     name : UInt8*
     non_terminal_hint : Bool
     bytes_per_frame : Int32
-    bytes_per_sample　: Int32
+    bytes_per_sample　 : Int32
     layout_error : Int32
   end
 
   alias RingBuffer = Void*
 
-  #### functions ####
+  fun version_string = soundio_version_string : UInt8*
+  fun version_major = soundio_version_major : Int32
+  fun version_minor = soundio_version_minor : Int32
+  fun version_patch = soundio_version_patch : Int32
 
-  #### versions ####
-  fun version_string = soundio_version_string() : UInt8*
-  fun version_major = soundio_version_major() : Int32
-  fun version_minor = soundio_version_minor() : Int32
-  fun version_patch = soundio_version_patch() : Int32
-
-  #### create/delete ####
-  fun create = soundio_create() : SoundIo*
+  fun create = soundio_create : SoundIo*
   fun destroy = soundio_destroy(SoundIo*) : Void
 
-  #### connection ####
   fun connect = soundio_connect(SoundIo*) : Int32
   fun connect_backend = soundio_connect_backend(SoundIo*, Backend) : Int32
   fun disconnect = soundio_disconnect(SoundIo*)
 
-  #### error ####
   fun strerror = soundio_strerror(Int32) : UInt8*
 
-  #### backend ####
   fun backend_name = soundio_backend_name(Backend) : UInt8*
   fun backend_count = soundio_backend_count(SoundIo*) : Int32
   fun get_backend = soundio_get_backend(SoundIo*, Int32) : Backend
   fun have_backend = soundio_have_backend(Backend) : Bool
 
-  #### event ####
   fun flush_events = soundio_flush_events(SoundIo*) : Void
   fun wait_events = soundio_wait_events(SoundIo*) : Void
   fun wakeup = soundio_wakeup(SoundIo*) : Void
   fun force_device_scan = soundio_force_device_scan(SoundIo*) : Void
 
-  #### channel layout ####
   fun channel_layout_equal = soundio_channel_layout_equal(ChannelLayout*, ChannelLayout*) : Bool
   fun get_channel_name = soundio_get_channel_name(ChannelId) : UInt8*
-  fun parse_channel_id = soundio_parse_channel_id(UInt8*, Int32) :  ChannelId
-  fun channel_layout_builtin_count = soundio_channel_layout_builtin_count() : Int32
+  fun parse_channel_id = soundio_parse_channel_id(UInt8*, Int32) : ChannelId
+  fun channel_layout_builtin_count = soundio_channel_layout_builtin_count : Int32
   fun channel_layout_get_builtin = soundio_channel_layout_get_builtin(Int32) : ChannelLayout*
   fun channel_layout_get_default = soundio_channel_layout_get_default(Int32) : ChannelLayout*
   fun channel_layout_find_channel = soundio_channel_layout_find_channel(ChannelLayout*, ChannelId) : Int32
@@ -295,11 +300,9 @@ lib LibSoundIo
   fun best_matching_channel_layout = soundio_best_matching_channel_layout(ChannelLayout*, Int32, ChannelLayout*, Int32) : ChannelLayout*
   fun sort_channel_layouts = soundio_sort_channel_layouts(ChannelLayout*, Int32) : Void
 
-  #### format ####
   fun get_bytes_per_sample = soundio_get_bytes_per_sample(Format) : Int32
-  fun format_string	= soundio_format_string(Format) : UInt8*
+  fun format_string = soundio_format_string(Format) : UInt8*
 
-  #### device ####
   fun input_device_count = soundio_input_device_count(SoundIo*) : Int32
   fun output_device_count = soundio_output_device_count(SoundIo*) : Int32
   fun get_input_device = soundio_get_input_device(SoundIo*, Int32) : Device*
@@ -315,7 +318,7 @@ lib LibSoundIo
   fun device_supports_sample_rate = soundio_device_supports_sample_rate(Device*, Int32) : Bool
   fun device_nearest_sample_rate = soundio_device_nearest_sample_rate(Device*, Int32) : Int32
 
-  #### stream ####
+  # ### stream ####
   fun outstream_create = soundio_outstream_create(Device*) : OutStream*
   fun outstream_destroy = soundio_outstream_destroy(OutStream*) : Void
   fun outstream_open = soundio_outstream_open(OutStream*) : Int32
@@ -337,7 +340,7 @@ lib LibSoundIo
   fun instream_pause = soundio_instream_pause(InStream*, Bool) : Int32
   fun instream_get_latency = soundio_instream_get_latency(InStream*, Float64*) : Int32
 
-  #### ring buffer ####
+  # ### ring buffer ####
   fun ring_buffer_create = soundio_ring_buffer_create(SoundIo*, Int32) : RingBuffer*
   fun ring_buffer_destroy = soundio_ring_buffer_destroy(RingBuffer*) : Void
   fun ring_buffer_capacity = soundio_ring_buffer_capacity(RingBuffer*) : Int32
