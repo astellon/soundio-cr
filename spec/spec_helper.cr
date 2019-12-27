@@ -8,7 +8,7 @@ module Helper
 
   at_exit { LibSoundIo.destroy(@@soundio) }
 
-  def get_soundio()
+  def get_soundio
     if @@soundio != Pointer(LibSoundIo::SoundIo).null
       LibSoundIo.destroy(@@soundio)
     end

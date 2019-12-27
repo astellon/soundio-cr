@@ -82,9 +82,9 @@ end
 
 seconds_offset = Pointer(Float64).malloc
 
-outstream.value.format         = LibSoundIo::Format::Float32LE
+outstream.value.format = LibSoundIo::Format::Float32NE
 outstream.value.write_callback = write_callback
-outstream.value.userdata       = seconds_offset.as(Pointer(Void))
+outstream.value.userdata = seconds_offset.as(Pointer(Void))
 
 if (err = LibSoundIo.outstream_open(outstream)) != 0
   STDERR.puts "unable to open device: " + String.new(LibSoundIo.strerror(err))
