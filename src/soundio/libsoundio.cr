@@ -318,7 +318,6 @@ lib LibSoundIo
   fun device_supports_sample_rate = soundio_device_supports_sample_rate(Device*, Int32) : Bool
   fun device_nearest_sample_rate = soundio_device_nearest_sample_rate(Device*, Int32) : Int32
 
-  # ### stream ####
   fun outstream_create = soundio_outstream_create(Device*) : OutStream*
   fun outstream_destroy = soundio_outstream_destroy(OutStream*) : Void
   fun outstream_open = soundio_outstream_open(OutStream*) : Int32
@@ -340,7 +339,6 @@ lib LibSoundIo
   fun instream_pause = soundio_instream_pause(InStream*, Bool) : Int32
   fun instream_get_latency = soundio_instream_get_latency(InStream*, Float64*) : Int32
 
-  # ### ring buffer ####
   fun ring_buffer_create = soundio_ring_buffer_create(SoundIo*, Int32) : RingBuffer*
   fun ring_buffer_destroy = soundio_ring_buffer_destroy(RingBuffer*) : Void
   fun ring_buffer_capacity = soundio_ring_buffer_capacity(RingBuffer*) : Int32
