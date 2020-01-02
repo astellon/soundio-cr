@@ -269,9 +269,9 @@ lib LibSoundIo
     layout : ChannelLayout
     software_latency : Float64
     userdata : Void*
-    read_callback : OutStream*, Int32, Int32 -> Void
-    overflow_callback : OutStream* -> Void
-    error_callback : OutStream*, Int32 -> Void
+    read_callback : InStream*, Int32, Int32 -> Void
+    overflow_callback : InStream* -> Void
+    error_callback : InStream*, Int32 -> Void
     name : UInt8*
     non_terminal_hint : Bool
     bytes_per_frame : Int32
@@ -337,7 +337,6 @@ lib LibSoundIo
   fun outstream_create = soundio_outstream_create(Device*) : OutStream*
   fun outstream_destroy = soundio_outstream_destroy(OutStream*) : Void
   fun outstream_open = soundio_outstream_open(OutStream*) : Int32
-  @[Raises]
   fun outstream_start = soundio_outstream_start(OutStream*) : Int32
   fun outstream_begin_write = soundio_outstream_begin_write(OutStream*, ChannelArea**, Int32*) : Int32
   fun outstream_end_write = soundio_outstream_end_write(OutStream*) : Int32
