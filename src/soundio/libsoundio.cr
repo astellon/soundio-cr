@@ -349,7 +349,7 @@ lib LibSoundIo
   fun instream_open = soundio_instream_open(InStream*) : Int32
   fun instream_start = soundio_instream_start(InStream*) : Int32
   fun instream_begin_read = soundio_instream_begin_read(InStream*, ChannelArea**, Int32*) : Int32
-  fun instream_end_read = soundio_instream_end_write(InStream*) : Int32
+  fun instream_end_read = soundio_instream_end_read(InStream*) : Int32
   fun instream_clear_buffer = soundio_instream_clear_buffer(InStream*) : Int32
   fun instream_pause = soundio_instream_pause(InStream*, Bool) : Int32
   fun instream_get_latency = soundio_instream_get_latency(InStream*, Float64*) : Int32
