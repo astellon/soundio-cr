@@ -258,7 +258,7 @@ lib LibSoundIo
     name : UInt8*
     non_terminal_hint : Bool
     bytes_per_frame : Int32
-    bytes_per_sample　 : Int32
+    bytes_per_sample : Int32
     layout_error : Int32
   end
 
