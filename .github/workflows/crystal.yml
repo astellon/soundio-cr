@@ -30,7 +30,7 @@ jobs:
         cd build
         cmake .. -DCMAKE_BUILD_TYPE=Release
         make
-        make install
+        sudo make install
     - name: Install dependencies
       run: shards install
     - name: Run tests
