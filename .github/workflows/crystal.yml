@@ -7,24 +7,30 @@ on:
 
 jobs:
   build:
-
+    strategy:
+      fail-fast: false
+      matrix:
+        crystal: [latest, nightly]
+        
     runs-on: ubuntu-latest
 
-    container:
-      image: crystallang/crystal:ci-nightly-fix-curl-dev
-
     steps:
-    - uses: actions/checkout@v1
+    - name: Download source
+      uses: actions/checkout@v2
+    - name: Install Crystal
+      uses: oprypin/install-crystal@v1
+      with:
+          crystal: ${{ matrix.crystal }}
     - name: Install libsoundio
       run: |
-        apt update && apt install -y cmake
+        sudo apt install -y cmake
         git clone -b 2.0.0 https://github.com/andrewrk/libsoundio.git
         cd libsoundio
         mkdir build
         cd build
         cmake .. -DCMAKE_BUILD_TYPE=Release
         make
-        make install
+        sudo make install
     - name: Install dependencies
       run: shards install
     - name: Run tests
